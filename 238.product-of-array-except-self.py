@@ -5,21 +5,23 @@
 #
 
 # @lc code=start
+from typing import List
+
+
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        ans = [1]
-        # finding prefix into ans
+        forward = [1]
+        reverese = [1]
         for i in range(1,len(nums)):
-            ans.append(nums[i-1]*ans[i-1])
+            forward.append(forward[i-1]*nums[i-1])
         
         prev=1
-        for i in range(len(nums)-2, -1, -1):
-            if(i!=len(nums)):
-                prev=prev*nums[i+1]
-                ans[i]=prev*ans[i]
-        return ans
-        
-        
+        for i in range(len(nums)-2,-1,-1):
+            prev=prev*nums[i+1]
+            forward[i]=forward[i]*prev
+                
+        print(forward)
+        return forward
+
         
 # @lc code=end
-
